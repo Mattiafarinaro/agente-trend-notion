@@ -1,21 +1,16 @@
 import json
 from typing import Any, Dict, List
 
-from langchain_core.prompts import ChatPromptTemplate
-from langchain_openai import ChatOpenAI
-
-from config.settings import OPENAI_API_KEY, OPENAI_MODEL
+from config.settings import HUGGINGFACE_API_KEY, HUGGINGFACE_MODEL
 
 
 class SearchAgent:
-    """Responsible for web search and content collection."""
+    """Collects search results for a topic."""
 
     def __init__(self, search_service: Any):
         self.search_service = search_service
-        self.llm = ChatOpenAI(
-            model=OPENAI_MODEL,
-            api_key=OPENAI_API_KEY,
-        ) if OPENAI_API_KEY else None
+        self.api_key = HUGGINGFACE_API_KEY
+        self.model = HUGGINGFACE_MODEL
 
     def collect_context(self, topic: str, max_results: int = 5) -> List[Dict[str, str]]:
         results = self.search_service.search(topic, max_results=max_results)
@@ -24,7 +19,7 @@ class SearchAgent:
             return [{
                 "title": f"No search results for: {topic}",
                 "url": "",
-                "content": "No external data was retrieved. The report is based on the search step only.",
+                "content": "No external data was retrieved.",
             }]
 
         context = []

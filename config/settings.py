@@ -3,8 +3,8 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-OPENAI_API_KEY = os.getenv("OPENAI_API_KEY", "")
-OPENAI_MODEL = os.getenv("OPENAI_MODEL", "gpt-4o-mini")
+HUGGINGFACE_API_KEY = os.getenv("HUGGINGFACE_API_KEY", "")
+HUGGINGFACE_MODEL = os.getenv("HUGGINGFACE_MODEL", "mistralai/Mistral-7B-Instruct-v0.1")
 NOTION_TOKEN = os.getenv("NOTION_TOKEN", "")
 NOTION_DATABASE_ID = os.getenv("NOTION_DATABASE_ID", "")
 SERPAPI_KEY = os.getenv("SERPAPI_KEY", "")
